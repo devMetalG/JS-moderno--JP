@@ -23,13 +23,12 @@ console.log('___________________________________');
 // primero trae el puntaje y después lo resta
 console.log('############ Puntaje-- ############');
 console.log(`Puntaje original: ${puntajeMinus}`);
-console.log(`Primero muestra la variable: ${puntajePlus--}`); 
-console.log(`Después la resta: ${puntajePlus}`); 
+console.log(`Primero muestra la variable: ${puntajeMinus--}`); 
+console.log(`Después la resta: ${puntajeMinus}`); 
 console.log('___________________________________');
 // hace la resta y lo muestra en el momento 
 console.log('############ --Puntaje ############');
 console.log(`Puntaje original: ${minusPuntaje}`);
-console.log(`Realiza la resta primero: ${++plusPuntaje}`); 
+console.log(`Realiza la resta primero: ${++minusPuntaje}`); 
 console.log(`Después de la resta: ${minusPuntaje}`);
 console.log('___________________________________');
-
