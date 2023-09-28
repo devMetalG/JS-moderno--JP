@@ -11,6 +11,12 @@ const carrito = [
 
 // Comprobar si un valor existe en un arreglo 
 
+for (let i = 0; i < meses.length; i++) {
+  if (meses[i] === 'Abril') {
+    console.log('Abril si está en el arreglo')
+  }
+}
+
 meses.forEach( mes => {
   if (mes === 'Enero') {
     console.log('Enero si existe');
