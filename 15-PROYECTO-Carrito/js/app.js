@@ -16,8 +16,8 @@ function agregarCurso(e){
   e.preventDefault();
   const cursoSeleccionado = e.target.parentElement.parentElement;
   if (e.target.classList.contains('agregar-carrito')) {
+    leerDatosCurso(cursoSeleccionado);
   }
-  leerDatosCurso(cursoSeleccionado);
 }
 
 // Lee el contenido del HTML y extrae la info del curso
@@ -50,10 +50,17 @@ function carritoHTML() {
   limpiarHTML();
 
   articulosCarrito.forEach( curso =>{
+    const {imagen, titulo, precio, cantidad, id} = curso;
     const row = document.createElement('tr');
     row.innerHTML = `
       <td>
-        ${curso.titulo}
+        <img src = "${imagen}" width= "100">
+      </td>
+      <td>${titulo}</td>
+      <td>${precio}</td>
+      <td>${cantidad}</td>
+      <td>
+        <a href="#" class="borrar-curso" data-id="${id}"> X </a>
       </td>
     `;
     // Agrega el HTML del carrito en el tbody
@@ -66,7 +73,7 @@ function carritoHTML() {
 function limpiarHTML() {
   // Forma lenta
   // contCarrito.innerHTML = '';
-  
+
   while (contCarrito.firstChild) {
     contCarrito.removeChild(contCarrito.firstChild)
   }
