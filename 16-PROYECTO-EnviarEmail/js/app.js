@@ -12,10 +12,17 @@ document.addEventListener('DOMContentLoaded', function (){
 
   function validar(e) {
     if (e.target.value.trim() === '') {
-      console.log('Esta vació');
+      mostrarAlerta();
     } else {
       console.log('Si hay algo');
     }
+  }
+
+  function mostrarAlerta() {
+    // Generar un alert 
+    const error = document.createElement('DIV');
+    error.textContent = 'Hubo un error...';
+    console.log(error);
   }
 });
 
