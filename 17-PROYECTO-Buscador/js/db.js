@@ -8,6 +8,15 @@ const autos = [
 		color: 'Blanco',
 		transmision: 'automatico'
 	},
+	{
+		marca: 'Porsche',
+		modelo: '911 Turbo',
+		year: 1975,
+		precio: 55000,
+		puertas: 2,
+		color: 'Rosa',
+		transmision: 'manual'
+	},
 	{ 
         marca: 'Audi', 
         modelo: 'A4', 
