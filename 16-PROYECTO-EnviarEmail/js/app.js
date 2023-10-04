@@ -2,12 +2,14 @@ document.addEventListener('DOMContentLoaded', function (){
 
   const email = {
     email: '',
+    cc: '',
     asunto: '',
     mensaje: ''
   }
 
   // Seleccionar los elementos de la interfaz
   const inputEmail = document.querySelector('#email');
+  const inputCC = document.querySelector('#emailcc');
   const inputAsunto = document.querySelector('#asunto');
   const inputMensaje = document.querySelector('#mensaje');
   const formulario = document.querySelector('#formulario');
@@ -17,6 +19,7 @@ document.addEventListener('DOMContentLoaded', function (){
 
   // Asignar eventos 
   inputEmail.addEventListener('input', validar);
+  inputCC.addEventListener('input', validarCC);
   inputAsunto.addEventListener('input', validar);
   inputMensaje.addEventListener('input', validar);
   formulario.addEventListener('submit', enviarEmail);
@@ -37,7 +40,51 @@ document.addEventListener('DOMContentLoaded', function (){
       spinner.classList.add('hidden');
 
       reiniciarform();
+
+      // Crear una alerta
+      const alertaExito = document.createElement('P');
+      alertaExito.classList.add(
+        'bg-green-500', 
+        'text-white', 
+        'p-2', 
+        'text-center', 
+        'rounded-lg', 
+        'mt-10', 
+        'font-bold', 
+        'text-sm' , 
+        'uppercase'
+      );
+      alertaExito.textContent = 'Mensaje Enviado correctamente!';
+
+      formulario.appendChild(alertaExito);
+
+      setTimeout(() => {
+        alertaExito.remove();
+      }, 3000);
     }, 3000);
+  }
+
+  function validarCC(e) {
+    if (e.target.id ==='emailcc' && !validarEmail(e.target.value)) {
+      if (e.target.value === '') {
+        limpiarAlerta(e.target.parentElement);
+        return;
+      } else{
+        mostrarAlerta('El email no es válido', e.target.parentElement);
+        email[e.target.name] = '';
+        comprobarEmail();
+        return;
+      }
+      
+    }
+
+    limpiarAlerta(e.target.parentElement);
+
+    // Asignar valores 
+    email[e.target.name] = e.target.value.trim().toLowerCase();
+    
+    // Comprobar el objeto email
+    comprobarEmail();
   }
 
   function validar(e) {
@@ -50,9 +97,11 @@ document.addEventListener('DOMContentLoaded', function (){
     if (e.target.id ==='email' && !validarEmail(e.target.value)) {
       mostrarAlerta('El email no es válido', e.target.parentElement);
       email[e.target.name] = '';
+      console.log(email);
       comprobarEmail();
       return;
     }
+    
     limpiarAlerta(e.target.parentElement);
 
     // Asignar valores 
@@ -91,7 +140,9 @@ document.addEventListener('DOMContentLoaded', function (){
   }
 
   function comprobarEmail() {
-    if (Object.values(email).includes('')) {
+    const email2 = [Object.values(email)[0], Object.values(email)[2], Object.values(email)[3]];
+    
+    if (Object.values(email2).includes('')) {
       btnSumbit.classList.add('opacity-50');
       btnSumbit.disabled = true;
       return;
@@ -103,6 +154,7 @@ document.addEventListener('DOMContentLoaded', function (){
   function reiniciarform() {
     // reiniciar el objeto
   email.email = '';
+  email.cc = '';
   email.asunto = '';
   email.mensaje = '';
 
