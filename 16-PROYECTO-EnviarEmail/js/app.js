@@ -97,7 +97,6 @@ document.addEventListener('DOMContentLoaded', function (){
     if (e.target.id ==='email' && !validarEmail(e.target.value)) {
       mostrarAlerta('El email no es válido', e.target.parentElement);
       email[e.target.name] = '';
-      console.log(email);
       comprobarEmail();
       return;
     }
@@ -140,15 +139,38 @@ document.addEventListener('DOMContentLoaded', function (){
   }
 
   function comprobarEmail() {
-    const email2 = [Object.values(email)[0], Object.values(email)[2], Object.values(email)[3]];
+    if (inputCC.value !== '') {
+      if (Object.values(email).includes('')) {
+        if (!validarEmail(email.cc)) {
+          btnSumbit.classList.add('opacity-50');
+          btnSumbit.disabled = true;
+          return;
+        }
+      } else {
+        btnSumbit.classList.remove('opacity-50');
+        btnSumbit.disabled = false;
+      }
+
+    } else {
+      const email2 = [Object.values(email)[0], Object.values(email)[2], Object.values(email)[3]];
     
-    if (Object.values(email2).includes('')) {
-      btnSumbit.classList.add('opacity-50');
-      btnSumbit.disabled = true;
-      return;
-    } 
-    btnSumbit.classList.remove('opacity-50');
-    btnSumbit.disabled = false;
+      if (Object.values(email2).includes('')) {
+        btnSumbit.classList.add('opacity-50');
+        btnSumbit.disabled = true;
+        return;
+      } 
+      btnSumbit.classList.remove('opacity-50');
+      btnSumbit.disabled = false;
+    }
+    // const email2 = [Object.values(email)[0], Object.values(email)[2], Object.values(email)[3]];
+    
+    // if (Object.values(email2).includes('')) {
+    //   btnSumbit.classList.add('opacity-50');
+    //   btnSumbit.disabled = true;
+    //   return;
+    // } 
+    // btnSumbit.classList.remove('opacity-50');
+    // btnSumbit.disabled = false;
     
   }
   function reiniciarform() {
