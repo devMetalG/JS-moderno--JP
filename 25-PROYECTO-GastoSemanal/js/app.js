@@ -44,6 +44,36 @@ class UI {
       divMensaje.remove();
     }, 3000);
   }
+
+  agergarGastoLista(gastos){
+    // Limpiar HTML
+    this.limpiarHTML();
+
+    // Iterar gastos
+    gastos.forEach(gasto => {
+      const {cantidad, nombre, id} = gasto;
+      // Crear LI
+      const nuevoGasto = document.createElement('LI');
+      nuevoGasto.className = 'list-group-item d-flex justify-content-between align-items-center';
+      nuevoGasto.dataset.id = id;
+      // Agregar HTML gasto
+      nuevoGasto.innerHTML = `
+        ${nombre} <span class="badge badge-primary badge-pill">${cantidad}</span>
+      `;
+      // Boton de borrar gasto
+      const btnBorrar = document.createElement('BUTTON');
+      btnBorrar.classList.add('btn', 'btn-danger', 'borrar-gasto');
+      btnBorrar.innerHTML = 'Borrar &times';
+      nuevoGasto.appendChild(btnBorrar);
+      // Agregar al HTML
+      gastoListado.appendChild(nuevoGasto);
+    });
+  }
+  limpiarHTML(){
+    while (gastoListado.firstChild) {
+      gastoListado.removeChild(gastoListado.firstChild);
+    }
+  }
 }
 
 // Instanciar 
@@ -83,6 +113,9 @@ function agregarGasto(e){
   presupuesto.nuevoGasto(gasto);
   // Mensaje de exito
   ui.imprimirAlerta('Gasto agregado correctamente');
+  // Imprimir los gastos 
+  const {gastos} = presupuesto;
+  ui.agergarGastoLista(gastos);
   // Reiniciar el formulario
   formulario.reset();
 }
