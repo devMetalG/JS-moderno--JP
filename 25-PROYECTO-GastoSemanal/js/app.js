@@ -73,5 +73,4 @@ function agregarGasto(e){
     ui.imprimirAlerta('Cantidad no valida', 'error');
     return;
   }
-  console.log('Agregando un gasto');
 }
