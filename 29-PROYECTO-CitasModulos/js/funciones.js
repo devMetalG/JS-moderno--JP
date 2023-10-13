@@ -1,3 +1,14 @@
+// Imports
+import Citas from "./classes/citas.js";
+import UI from "./classes/UI.js";
+import { mascotaInput,
+  propietarioInput,
+  telefonoInput,
+  fechaInput,
+  horaInput,
+  sintomasInput,
+  formulario 
+} from "./selectores.js";
 const ui = new UI();
 const administrarCitas = new Citas();
 let editando;
