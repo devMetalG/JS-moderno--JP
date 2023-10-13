@@ -1,5 +1,5 @@
 // Imports
-import { eliminarCita, cargarEdicion } from "../funciones";
+import { eliminarCita, cargarEdicion } from "../funciones.js";
 import { contenedorCitas } from "../selectores.js";
 
 class UI {

@@ -4,7 +4,6 @@ class Citas{
   }
   agregarCita(cita){
     this.citas = [...this.citas, cita];
-    console.log(this.citas);
   }
   eliminarCita(id){
     this.citas = this.citas.filter(cita => cita.id !== id);
