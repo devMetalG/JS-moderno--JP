@@ -18,8 +18,8 @@
     abrirConexion.onsuccess = function(){
       DB = abrirConexion.result;
     }
-
   }
+  
   function validarCliente(e){
     e.preventDefault();
 
