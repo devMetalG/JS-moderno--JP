@@ -3,6 +3,8 @@ function iniciarApp(){
   const selectCategorias = document.querySelector('#categorias')
   selectCategorias.addEventListener('change', seleccionarCategoria)
 
+  const resultado = document.querySelector('#resultado')
+
   obtenerCategorias()
   function obtenerCategorias(){
     const url = 'https://www.themealdb.com/api/json/v1/1/categories.php'
@@ -32,6 +34,7 @@ function iniciarApp(){
   }
 
   function mostrarRecetas(recetas = []){
+    limpiarHTML()
     recetas.forEach(receta => {
       const {idMeal, strMeal, strMealThumb} = receta
 
@@ -46,8 +49,37 @@ function iniciarApp(){
       recetaImg.classList.add('card-img-top')
       recetaImg.alt = `Imagen de la receta ${strMeal}`
       recetaImg.src = strMealThumb
+
+      const recetaCardBody = document.createElement('DIV')
+      recetaCardBody.classList.add('card-body')
+
+      const recetaHeading = document.createElement('H3')
+      recetaHeading. classList.add('card-title', 'mb-3')
+      recetaHeading.textContent = strMeal
+
+      const recetaButton = document.createElement('BUTTON')
+      recetaButton.classList.add('btn', 'btn-danger', 'w-100')
+      recetaButton.textContent = 'Ver Receta'
+
+      // Inyectar en el HTML
+
+      recetaCardBody.appendChild(recetaHeading)
+      recetaCardBody.appendChild(recetaButton)
+
+      card.appendChild(recetaImg)
+      card.appendChild(recetaCardBody)
+
+      recetaContainer.appendChild(card)
+
+      resultado.appendChild(recetaContainer)
       console.log(recetaImg)
     })
+  }
+
+  function limpiarHTML(){
+    while (resultado.firstChild) {
+      resultado.removeChild(resultado.firstChild)
+    }
   }
 }
 
