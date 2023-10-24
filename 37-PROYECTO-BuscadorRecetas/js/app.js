@@ -28,7 +28,26 @@ function iniciarApp(){
     
     fetch(url)
       .then(response => response.json())
-      .then(result => console.log(result))
+      .then(result => mostrarRecetas(result.meals))
+  }
+
+  function mostrarRecetas(recetas = []){
+    recetas.forEach(receta => {
+      const {idMeal, strMeal, strMealThumb} = receta
+
+      console.log(receta)
+      const recetaContainer = document.createElement('DIV')
+      recetaContainer.classList.add('col-md-4')
+
+      const card = document.createElement('DIV')
+      card.classList.add('card', 'mb-4')
+
+      const recetaImg = document.createElement('IMG')
+      recetaImg.classList.add('card-img-top')
+      recetaImg.alt = `Imagen de la receta ${strMeal}`
+      recetaImg.src = strMealThumb
+      console.log(recetaImg)
+    })
   }
 }
 
