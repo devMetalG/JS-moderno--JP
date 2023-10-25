@@ -125,13 +125,31 @@ function iniciarApp(){
     }
 
     modalBody.appendChild(listGroup)
+
+    const modalFooter = document.querySelector('.modal-footer')
+
+    limpiarHTML(modalFooter)
+    // Botones de cerrar y favorito
+    const btnFav = document.createElement('BUTTON')
+    btnFav.classList.add('btn', 'btn-danger', 'col')
+    btnFav.textContent = 'Guardar Favorito'
+    
+    const btnClose = document.createElement('BUTTON')
+    btnClose.classList.add('btn', 'btn-secondary', 'col')
+    btnClose.textContent = 'Cerrar'
+    btnClose.onclick = function(){
+      modal.hide()
+    }
+
+    modalFooter.appendChild(btnFav)
+    modalFooter.appendChild(btnClose)
     // Muestra el modal
     modal.show()
   }
 
   function limpiarHTML(selector){
     while (selector.firstChild) {
-      selector.removeChild(resultado.firstChild)
+      selector.removeChild(selector.firstChild)
     }
   }
 }
