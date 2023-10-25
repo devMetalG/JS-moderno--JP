@@ -45,7 +45,6 @@ function iniciarApp(){
     recetas.forEach(receta => {
       const {idMeal, strMeal, strMealThumb} = receta
 
-      console.log(receta)
       const recetaContainer = document.createElement('DIV')
       recetaContainer.classList.add('col-md-4')
 
@@ -67,6 +66,11 @@ function iniciarApp(){
       const recetaButton = document.createElement('BUTTON')
       recetaButton.classList.add('btn', 'btn-danger', 'w-100')
       recetaButton.textContent = 'Ver Receta'
+      // recetaButton.dataset.bsTarget = '#modal'
+      // recetaButton.dataset.bsToggle = 'modal'
+      recetaButton.onclick = function(){
+        seleccionarReceta(idMeal)
+      }
 
       // Inyectar en el HTML
 
@@ -79,8 +83,11 @@ function iniciarApp(){
       recetaContainer.appendChild(card)
 
       resultado.appendChild(recetaContainer)
-      console.log(recetaImg)
     })
+  }
+
+  function seleccionarReceta(id){
+    const url = `https://themealdb.com/api/json/v1/1/lookup.php?i=${id}`
   }
 
   function limpiarHTML(selector){
