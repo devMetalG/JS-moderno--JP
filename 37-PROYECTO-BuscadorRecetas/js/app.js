@@ -132,12 +132,14 @@ function iniciarApp(){
     // Botones de cerrar y favorito
     const btnFav = document.createElement('BUTTON')
     btnFav.classList.add('btn', 'btn-danger', 'col')
-    btnFav.textContent = 'Guardar Favorito'
+    btnFav.textContent = existeStorage(idMeal) ? 'Eliminar Favorito' : 'Guardar Favorito'
 
     // localStorage
     btnFav.onclick = function(){
 
       if (existeStorage(idMeal)) {
+        eliminarFavorito(idMeal)
+        btnFav.textContent = 'Guardar Favorito'
         return
       }
       agregarFavorito({
@@ -145,6 +147,7 @@ function iniciarApp(){
         title: strMeal,
         img: strMealThumb
       })
+      btnFav.textContent = 'Eliminar Favorito'
     }
     
     const btnClose = document.createElement('BUTTON')
@@ -163,6 +166,12 @@ function iniciarApp(){
   function agregarFavorito(receta){
     const favoritos = JSON.parse(localStorage.getItem('favoritos')) ?? []
     localStorage.setItem('favoritos', JSON.stringify([...favoritos, receta]))
+  }
+
+  function eliminarFavorito(id){
+    const favoritos = JSON.parse(localStorage.getItem('favoritos')) ?? []
+    const nuevosFavoritos = favoritos.filter(favorito => favorito.id !== id)
+    localStorage.setItem('favoritos', JSON.stringify(nuevosFavoritos))
   }
 
   function existeStorage(id){
