@@ -1,7 +1,8 @@
 const resultado = document.querySelector('#resultado')
 const formulario = document.querySelector('#formulario')
 const registrosPorPag = 48
-let totalPags;
+let totalPags
+let iterador
 
 window.onload = () => {
   formulario.addEventListener('submit', validarFormulario)
@@ -75,6 +76,18 @@ function mostrarImgs(imgs){
       </div>
     `
   })
+  imprimirPaginador()
+}
+
+// Generador de paginación
+function *paginador(total){
+  for (let i = 1; i <= total; i++) {
+    yield i
+  }
+}
+
+function imprimirPaginador(){
+  iterador = paginador(totalPags)
 }
 
 function calcularPags(total){
