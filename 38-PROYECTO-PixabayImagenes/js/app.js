@@ -1,9 +1,10 @@
 const resultado = document.querySelector('#resultado')
 const formulario = document.querySelector('#formulario')
 const paginacioDiv = document.querySelector('#paginacion')
-const registrosPorPag = 48
+const registrosPorPag = 24
 let totalPags
 let iterador
+let pagActual = 1
 
 window.onload = () => {
   formulario.addEventListener('submit', validarFormulario)
@@ -13,12 +14,11 @@ function validarFormulario(e){
   e.preventDefault()
 
   const terminoBusqueda = document.querySelector('#termino').value
-
   if (terminoBusqueda === '') {
     mostrarAlerta('Agrega un término de búsqueda')
     return
   }
-  buscarImgs(terminoBusqueda)
+  buscarImgs()
 }
 
 function mostrarAlerta(mensaje){
@@ -41,9 +41,11 @@ function mostrarAlerta(mensaje){
   }
 }
 
-function buscarImgs(termino){
+function buscarImgs(){
+  const termino = document.querySelector('#termino').value
   const key = '40281056-3a58b311f8d46a7cb9b988286'
-  const url = `https://pixabay.com/api/?key=${key}&q=${termino}&per_page=${registrosPorPag}`
+  const url = 
+  `https://pixabay.com/api/?key=${key}&q=${termino}&per_page=${registrosPorPag}&page=${pagActual}`
   fetch(url)
     .then(response => response.json())
     .then(result => {
@@ -100,7 +102,12 @@ function imprimirPaginador(){
     boton.dataset.pagina = value
     boton.textContent = value
     boton.classList.add('siguiente', 'bg-yellow-400', 'px-4', 'py-1',
-     'mr-2', 'font-bold', 'mb-4', 'uppercase', 'rounded')
+     'mr-2', 'font-bold', 'mb-4', 'rounded')
+     
+     boton.onclick = () =>{
+      pagActual = value
+      buscarImgs()
+     }
      paginacioDiv.appendChild(boton)
   }
 }
