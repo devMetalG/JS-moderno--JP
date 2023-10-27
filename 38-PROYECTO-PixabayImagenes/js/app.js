@@ -1,5 +1,7 @@
 const resultado = document.querySelector('#resultado')
 const formulario = document.querySelector('#formulario')
+const registrosPorPag = 48
+let totalPags;
 
 window.onload = () => {
   formulario.addEventListener('submit', validarFormulario)
@@ -42,7 +44,10 @@ function buscarImgs(termino){
   const url = `https://pixabay.com/api/?key=${key}&q=${termino}&per_page=100`
   fetch(url)
     .then(response => response.json())
-    .then(result => mostrarImgs(result.hits))
+    .then(result => {
+      totalPags = calcularPags(result.totalHits)
+      mostrarImgs(result.hits)
+    })
 }
 
 function mostrarImgs(imgs){
@@ -70,6 +75,10 @@ function mostrarImgs(imgs){
       </div>
     `
   })
+}
+
+function calcularPags(total){
+  return parseInt(Math.ceil(total/registrosPorPag))
 }
 
 function limpiarHTML(){
