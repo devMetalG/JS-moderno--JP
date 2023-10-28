@@ -1,6 +1,8 @@
 const criptomonedasSelect = document.querySelector('#criptomonedas')
 const monedaSelect = document.querySelector('#moneda')
 const formulario = document.querySelector('#formulario')
+const resultado = document.querySelector('#resultado')
+
 const objBusqueda = {
   moneda: '',
   criptomoneda: ''
@@ -52,7 +54,6 @@ function enviarFormulario(e){
 
 function leerValor(e){
   objBusqueda[e.target.name] = e.target.value
-  console.log(objBusqueda)
 }
 
 function mostrarAlerta(mensaje){
@@ -80,5 +81,43 @@ function consultarAPI(){
 }
 
 function mostrarCotizacion(cotizacion){
-  console.log(cotizacion)
+  limpiarHTML(resultado)
+  const {PRICE, HIGHDAY, LOWDAY, CHANGEPCT24HOUR, LASTUPDATE} = cotizacion
+
+  const precio = document.createElement('P')
+  precio.classList.add('precio')
+  precio.innerHTML = `
+    El precio es: <span>${PRICE}</span>
+  `
+  
+  const precioAlto = document.createElement('P')
+  precioAlto.innerHTML = `
+    El precio más alto del día es: <span>${HIGHDAY}</span>
+  `
+  
+  const precioBajo = document.createElement('P')
+  precioBajo.innerHTML = `
+    El precio más bajo del día es: <span>${LOWDAY}</span>
+  `
+  
+  const ultimasHoras = document.createElement('P')
+  ultimasHoras.innerHTML = `
+    Variación últimas 24H: <span>${CHANGEPCT24HOUR}%</span>
+  `
+  
+  const ultimaActualizacion = document.createElement('P')
+  ultimaActualizacion.innerHTML = `
+    Última actualización: <span>${LASTUPDATE}</span>
+  `
+  resultado.appendChild(precio)
+  resultado.appendChild(precioAlto)
+  resultado.appendChild(precioBajo)
+  resultado.appendChild(ultimasHoras)
+  resultado.appendChild(ultimaActualizacion)
+}
+
+function limpiarHTML(selector){
+  while (selector.firstChild) {
+    selector.removeChild(selector.firstChild)
+  }
 }
