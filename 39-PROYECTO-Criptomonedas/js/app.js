@@ -75,6 +75,8 @@ function consultarAPI(){
 
   const url = `https://min-api.cryptocompare.com/data/pricemultifull?fsyms=${criptomoneda}&tsyms=${moneda}`
 
+  mostrarSpinner()
+
   fetch(url)
     .then(response => response.json())
     .then(result => mostrarCotizacion(result.DISPLAY[criptomoneda][moneda]))
@@ -120,4 +122,15 @@ function limpiarHTML(selector){
   while (selector.firstChild) {
     selector.removeChild(selector.firstChild)
   }
+}
+
+function mostrarSpinner(){
+  limpiarHTML(resultado)
+  const spinner = document.createElement('DIV')
+  spinner.classList.add('spinner')
+  spinner.innerHTML = `
+    <div class="dot1"></div>
+    <div class="dot2"></div>
+  `
+  resultado.appendChild(spinner)
 }
