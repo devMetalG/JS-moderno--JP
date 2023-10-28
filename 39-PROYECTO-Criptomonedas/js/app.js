@@ -46,6 +46,8 @@ function enviarFormulario(e){
     mostrarAlerta('Ambos campos son obligatorios')
     return
   }
+
+  consultarAPI()
 }
 
 function leerValor(e){
@@ -54,12 +56,29 @@ function leerValor(e){
 }
 
 function mostrarAlerta(mensaje){
-  const resultado = document.querySelector('#resultado')
-  const alerta = document.createElement('DIV')
-  alerta.classList.add('bg-red-100')
-  alerta.textContent = mensaje
-  resultado.appendChild(alerta)
-  setTimeout(() => {
-    alerta.remove()
-  }, 3000);
+  const existeError = document.querySelector('.error')
+
+  if (!existeError) {
+    const alerta = document.createElement('DIV')
+    alerta.classList.add('error')
+    alerta.textContent = mensaje
+    formulario.appendChild(alerta)
+    setTimeout(() => {
+      alerta.remove()
+    }, 3000);
+  }
+}
+
+function consultarAPI(){
+  const {criptomoneda, moneda} = objBusqueda
+
+  const url = `https://min-api.cryptocompare.com/data/pricemultifull?fsyms=${criptomoneda}&tsyms=${moneda}`
+
+  fetch(url)
+    .then(response => response.json())
+    .then(result => mostrarCotizacion(result.DISPLAY[criptomoneda][moneda]))
+}
+
+function mostrarCotizacion(cotizacion){
+  console.log(cotizacion)
 }
