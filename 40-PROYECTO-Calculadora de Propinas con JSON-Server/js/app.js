@@ -17,7 +17,13 @@ function guardarCliente(){
     mostrarAlerta('Todos los campos son obligatorios')
     return
   } 
-  console.log('Campos llenos')
+  // Asignar datos de form a cliente
+  cliente = {...cliente, mesa, hora}
+
+  // Ocultar modal
+  const modalForm = document.querySelector('#formulario')
+  const modalBootstrap = bootstrap.Modal.getInstance(modalForm)
+  modalBootstrap.hide()
 }
 
 function mostrarAlerta(msg){
