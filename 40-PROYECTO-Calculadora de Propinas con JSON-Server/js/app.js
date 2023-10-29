@@ -26,6 +26,8 @@ function guardarCliente(){
   modalBootstrap.hide()
 
   mostrarSecciones()
+
+  obtenerPlatillos()
 }
 
 function mostrarAlerta(msg){
@@ -47,4 +49,13 @@ function mostrarAlerta(msg){
 function mostrarSecciones(){
   const seccionesOcultas = document.querySelectorAll('.d-none')
   seccionesOcultas.forEach(section => section.classList.remove('d-none'))
+}
+
+function obtenerPlatillos(){
+  const url = 'http://localhost:4000/platillos'
+
+  fetch(url)
+    .then(response => response.json())
+    .then(result => console.log(result))
+    .catch(error => console.log(error))
 }
