@@ -97,6 +97,13 @@ function mostrarPlatillos(platillos){
     agregar.classList.add('col-md-2')
     agregar.appendChild(inputCantidad)
 
+    // Funcion detecta cantidad y platillo agregado
+
+    inputCantidad.onchange = function(){
+      const cantidad = parseInt(inputCantidad.value)
+      agregarPlatillo({...platillo, cantidad})
+    }
+
     row.appendChild(nombrePlatillo)
     row.appendChild(precioPlatillo)
     row.appendChild(categoriaPlatillo)
@@ -109,4 +116,8 @@ function limpiarHTML(selector){
   while (selector.firstChild) {
     selector.removeChild(selector.firstChild)
   }
+}
+
+function agregarPlatillo(product){
+  console.log(product)
 }
