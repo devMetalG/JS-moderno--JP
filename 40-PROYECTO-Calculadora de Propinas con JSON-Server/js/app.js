@@ -70,9 +70,9 @@ function mostrarPlatillos(platillos){
   const contenido = document.querySelector('.contenido')
   limpiarHTML(contenido)
   platillos.forEach(platillo => {
-    const {nombre, precio, categoria} = platillo
+    const {nombre, precio, categoria, id} = platillo
     const row = document.createElement('DIV')
-    row.classList.add('row', 'py-3', 'border-top')
+    row.classList.add('row', 'py-3', 'border-top', 'align-items-center')
 
     const nombrePlatillo = document.createElement('DIV')
     nombrePlatillo.classList.add('col-md-4')
@@ -86,9 +86,21 @@ function mostrarPlatillos(platillos){
     categoriaPlatillo.classList.add('col-md-3','d-flex', 'align-items-center')
     categoriaPlatillo.textContent = categorias[categoria]
 
+    const inputCantidad = document.createElement('INPUT')
+    inputCantidad.type = 'number'
+    inputCantidad.min = 0
+    inputCantidad.id = `producto-${id}`
+    inputCantidad.value = 0
+    inputCantidad.classList.add('form-control', 'lh-1')
+
+    const agregar = document.createElement('DIV')
+    agregar.classList.add('col-md-2')
+    agregar.appendChild(inputCantidad)
+
     row.appendChild(nombrePlatillo)
     row.appendChild(precioPlatillo)
     row.appendChild(categoriaPlatillo)
+    row.appendChild(agregar)
     contenido.appendChild(row)
   })
 }
