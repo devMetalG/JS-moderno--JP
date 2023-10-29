@@ -4,6 +4,12 @@ let cliente = {
   pedido: []
 }
 
+const categorias = {
+  1: 'Comida',
+  2: 'Bebidas',
+  3: 'Postres'
+}
+
 const btnGuardarCliente = document.querySelector('#guardar-cliente')
 btnGuardarCliente.addEventListener('click', guardarCliente)
 
@@ -56,6 +62,39 @@ function obtenerPlatillos(){
 
   fetch(url)
     .then(response => response.json())
-    .then(result => console.log(result))
+    .then(result => mostrarPlatillos(result))
     .catch(error => console.log(error))
+}
+
+function mostrarPlatillos(platillos){
+  const contenido = document.querySelector('.contenido')
+  limpiarHTML(contenido)
+  platillos.forEach(platillo => {
+    const {nombre, precio, categoria} = platillo
+    const row = document.createElement('DIV')
+    row.classList.add('row', 'py-3', 'border-top')
+
+    const nombrePlatillo = document.createElement('DIV')
+    nombrePlatillo.classList.add('col-md-4')
+    nombrePlatillo.textContent = nombre
+    
+    const precioPlatillo = document.createElement('DIV')
+    precioPlatillo.classList.add('col-md-3','d-flex', 'align-items-center', 'fw-bold')
+    precioPlatillo.textContent = `$${precio}`
+    
+    const categoriaPlatillo = document.createElement('DIV')
+    categoriaPlatillo.classList.add('col-md-3','d-flex', 'align-items-center')
+    categoriaPlatillo.textContent = categorias[categoria]
+
+    row.appendChild(nombrePlatillo)
+    row.appendChild(precioPlatillo)
+    row.appendChild(categoriaPlatillo)
+    contenido.appendChild(row)
+  })
+}
+
+function limpiarHTML(selector){
+  while (selector.firstChild) {
+    selector.removeChild(selector.firstChild)
+  }
 }
