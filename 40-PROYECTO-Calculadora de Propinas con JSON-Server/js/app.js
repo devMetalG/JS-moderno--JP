@@ -144,5 +144,101 @@ function agregarPlatillo(product){
     const resultado = pedido.filter(articulo => articulo.id !== id)
     cliente.pedido = [...resultado]
   }
+  // Mostrar resumen
+  actualizarResumen()
+}
 
+function actualizarResumen(){
+  const contenido = document.querySelector('#resumen .contenido')
+  limpiarHTML(contenido)
+
+  const resumen = document.createElement('DIV')
+  resumen.classList.add('col-md-6', 'card', 'py-5', 'px-3', 'shadow')
+  
+  const mesa = document.createElement('P')
+  mesa.textContent = 'Mesa: '
+  mesa.classList.add('fw-bold')
+  
+  const mesaSpan = document.createElement('SPAN')
+  mesaSpan.textContent = cliente.mesa
+  mesaSpan.classList.add('fw-normal')
+  mesa.appendChild(mesaSpan)
+  
+  const hora = document.createElement('P')
+  hora.textContent = 'Hora: '
+  hora.classList.add('fw-bold')
+  
+  const horaSpan = document.createElement('SPAN')
+  horaSpan.textContent = cliente.hora
+  horaSpan.classList.add('fw-normal')
+  hora.appendChild(horaSpan)
+
+  const heading = document.createElement('H3')
+  heading.textContent = 'Platillos consumidos'
+  heading.classList.add('my-4', 'text-center')
+
+  // Iterar array de pedidos
+  const grupo = document.createElement('UL')
+  grupo.classList.add('list-group')
+  const {pedido} = cliente
+  pedido.forEach(articulo => {
+    const {nombre, cantidad, precio, id} = articulo
+
+    const lista = document.createElement('LI')
+    lista.classList.add('list-group-item')
+
+    const nombreArticulo = document.createElement('H4')
+    nombreArticulo.classList.add('my-4')
+    nombreArticulo.textContent = nombre
+
+    const cantidadArticulo = document.createElement('P')
+    cantidadArticulo.classList.add('fw-bold')
+    cantidadArticulo.textContent = 'Cantidad: '
+
+    const cantidadValor = document.createElement('SPAN')
+    cantidadValor.classList.add('fw-normal')
+    cantidadValor.textContent = cantidad
+
+    cantidadArticulo.appendChild(cantidadValor)
+    
+    const precioArticulo = document.createElement('P')
+    precioArticulo.classList.add('fw-bold')
+    precioArticulo.textContent = 'Precio: $'
+
+    const precioValor = document.createElement('SPAN')
+    precioValor.classList.add('fw-normal')
+    precioValor.textContent = precio
+    
+    precioArticulo.appendChild(precioValor)
+    
+    const subtotalArticulo = document.createElement('P')
+    subtotalArticulo.classList.add('fw-bold')
+    subtotalArticulo.textContent = 'Subtotal: $'
+
+    const subtotalValor = document.createElement('SPAN')
+    subtotalValor.classList.add('fw-normal')
+    subtotalValor.textContent = calcularSubtotal(precio, cantidad)
+
+    subtotalArticulo.appendChild(subtotalValor)
+
+    // Agregar elementos al LI
+    lista.appendChild(nombreArticulo)
+    lista.appendChild(cantidadArticulo)
+    lista.appendChild(precioArticulo)
+    lista.appendChild(subtotalArticulo)
+
+    // Agregar lista al grupo principal
+    grupo.appendChild(lista)
+  })
+
+  resumen.appendChild(mesa)
+  resumen.appendChild(hora)
+  resumen.appendChild(heading)
+  resumen.appendChild(grupo)
+
+  contenido.appendChild(resumen)
+}
+
+function calcularSubtotal(precio, cantidad){
+  return precio * cantidad
 }
