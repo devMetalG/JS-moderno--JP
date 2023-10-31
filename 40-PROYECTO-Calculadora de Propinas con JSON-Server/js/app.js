@@ -144,8 +144,15 @@ function agregarPlatillo(product){
     const resultado = pedido.filter(articulo => articulo.id !== id)
     cliente.pedido = [...resultado]
   }
-  // Mostrar resumen
-  actualizarResumen()
+
+  if (cliente.pedido.length) {
+    // Mostrar resumen
+    actualizarResumen()
+  } else{
+    const contenido = document.querySelector('#resumen .contenido')
+    limpiarHTML(contenido)
+    mensajePedidoVacio()
+  }
 }
 
 function actualizarResumen(){
@@ -221,11 +228,19 @@ function actualizarResumen(){
 
     subtotalArticulo.appendChild(subtotalValor)
 
+    const btnEliminar = document.createElement('BUTTON')
+    btnEliminar.classList.add('btn', 'btn-danger')
+    btnEliminar.textContent = 'Eliminar del Pedido'
+    btnEliminar.onclick = function(){
+      eliminarProducto(id)
+    }
+
     // Agregar elementos al LI
     lista.appendChild(nombreArticulo)
     lista.appendChild(cantidadArticulo)
     lista.appendChild(precioArticulo)
     lista.appendChild(subtotalArticulo)
+    lista.appendChild(btnEliminar)
 
     // Agregar lista al grupo principal
     grupo.appendChild(lista)
@@ -241,4 +256,33 @@ function actualizarResumen(){
 
 function calcularSubtotal(precio, cantidad){
   return precio * cantidad
+}
+
+function eliminarProducto(id){
+  const contenido = document.querySelector('#resumen .contenido')
+  const {pedido} = cliente
+  const resultado = pedido.filter(articulo => articulo.id !== id)
+  cliente.pedido = [...resultado]
+
+  if (cliente.pedido.length) {
+    // Mostrar resumen
+    actualizarResumen()
+  } else{
+    limpiarHTML(contenido)
+    mensajePedidoVacio()
+  }
+
+  // Regresar inputs a 0
+  const productoEliminado = `#producto-${id}`
+  const inputEliminado = document.querySelector(productoEliminado)
+  inputEliminado.value = 0
+}
+
+function mensajePedidoVacio(){
+  const contenido = document.querySelector('#resumen .contenido')
+  const texto = document.createElement('P')
+  texto.classList.add('text-center')
+  texto.textContent = 'Añade los elementos del pedido'
+
+  contenido.appendChild(texto)
 }
