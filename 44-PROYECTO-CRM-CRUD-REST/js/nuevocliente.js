@@ -33,23 +33,4 @@ import { nuevoCliente } from './API.js'
   function validar(obj){
     return !Object.values(obj).every(input => input !== '')
   }
-
-  // function crearCliente(cliente){
-  //   const transaction = DB.transaction(['crm'], 'readwrite');
-    
-  //   const objectStore = transaction.objectStore('crm');
-  //   objectStore.add(cliente);
-
-  //   transaction.onerror = function() {
-  //     imprimirAlerta('Hubo un error.', 'error');
-  //   }
-
-  //   transaction.oncomplete = function() {
-  //     imprimirAlerta('El cliente se agrego correctamente');
-
-  //     setTimeout(() => {
-  //       window.location.href = 'index.html';
-  //     }, 3000);
-  //   }
-  // }
 })();
