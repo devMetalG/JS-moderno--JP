@@ -6,6 +6,13 @@
       "telefono": "12",
       "empresa": "12212",
       "id": 26
+    },
+    {
+      "nombre": "casa",
+      "email": "fra.borjon@gmail.com",
+      "telefono": "4778062470",
+      "empresa": "Sin empresa",
+      "id": 27
     }
   ]
 }

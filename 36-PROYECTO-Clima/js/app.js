@@ -49,7 +49,7 @@ function mostrarError(mensaje){
 }
 
 function consultarAPI(ciudad, pais){
-  const appID = 'eda6834b8ed10bd35492051e0cac5938'
+  const appID = 'XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX'
 
   const url = `https://api.openweathermap.org/data/2.5/weather?q=${ciudad},${pais}&appid=${appID}`
   
