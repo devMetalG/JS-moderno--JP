@@ -1,6 +1,8 @@
-import { obtenerClientes } from './API.js'
+import { obtenerClientes, eliminarCliente } from './API.js'
 (function () {
-  const listadoClientes = document.querySelector('#listado-clientes');
+  const listadoClientes = document.querySelector('#listado-clientes')
+
+  listadoClientes.addEventListener('click', confirmarEliminar)
 
   document.addEventListener('DOMContentLoaded', mostrarClientes)
 
@@ -32,24 +34,16 @@ import { obtenerClientes } from './API.js'
     })
   }
 
-  // function eliminarRegistro(e){
-  //   if (e.target.classList.contains('eliminar')) {
-  //     const idEliminar = Number(e.target.dataset.cliente);
+  function confirmarEliminar(e){
+    if (e.target.classList.contains('eliminar')) {
+      const clienteId = parseInt(e.target.dataset.cliente)
+      console.log(clienteId)
 
-  //     const confirmar = confirm('Deseas eliminar este cliente?');
-  //     if (confirmar) {
-  //       const transaction = DB.transaction(['crm'], 'readwrite');
-  //       const objectStore = transaction.objectStore('crm');
-  //       objectStore.delete(idEliminar);
+      const confirmar = confirm('Deseas eliminar este cliente?')
 
-  //       transaction.oncomplete = function(){
-  //         e.target.parentElement.parentElement.remove();
-  //       }
-        
-  //       transaction.onerror = function(){
-  //         console.log('Hubo un error');
-  //       }
-  //     }
-  //   }
-  // }
+      if (confirmar) {
+        eliminarCliente(clienteId)
+      }
+    }
+  }
 })();
