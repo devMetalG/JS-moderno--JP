@@ -1,4 +1,4 @@
-import { imprimirAlerta } from './funciones.js'
+import { imprimirAlerta, validar } from './funciones.js'
 import { nuevoCliente } from './API.js'
 (function(){
   document.addEventListener('DOMContentLoaded', () => {
@@ -26,11 +26,5 @@ import { nuevoCliente } from './API.js'
       return
     }
     nuevoCliente(cliente)
-    cliente.id = Date.now();
-    // crearCliente(cliente);
-  }
-
-  function validar(obj){
-    return !Object.values(obj).every(input => input !== '')
   }
 })();

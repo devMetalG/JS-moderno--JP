@@ -1,18 +1,4 @@
-// let DB;
 const formulario = document.querySelector('#formulario');
-
-// function conectarDB(){
-//   const abrirConexion = window.indexedDB.open('crm', 1);
-
-//   abrirConexion.onerror = function(){
-//     console.log('Hubo un error.');
-//   }
-
-//   abrirConexion.onsuccess = function(){
-//     DB = abrirConexion.result;
-//   }
-// }
-
 export function imprimirAlerta(mensaje, tipo){
   const alerta = document.querySelector('.alerta');
 
@@ -34,4 +20,8 @@ export function imprimirAlerta(mensaje, tipo){
       divMensaje.remove();
     }, 3000);
   }
+}
+
+export function validar(obj){
+  return !Object.values(obj).every(input => input !== '')
 }
