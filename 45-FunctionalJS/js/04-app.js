@@ -7,4 +7,15 @@ const carrito = [
     { nombre: 'Celular', precio: 500},
     { nombre: 'Bocinas', precio: 300},
     { nombre: 'Laptop', precio: 800},
-];
+]
+
+// antes 
+// const resultado = carrito.map(producto => producto.nombre)
+
+// Despues
+const obtenerNombres = producto => {
+    return producto.nombre
+}
+
+const resultado = carrito.map(obtenerNombres)
+console.log(resultado)
