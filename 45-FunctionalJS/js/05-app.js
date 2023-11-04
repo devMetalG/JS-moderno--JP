@@ -7,4 +7,12 @@ const carrito = [
     { nombre: 'Celular', precio: 500},
     { nombre: 'Bocinas', precio: 300},
     { nombre: 'Laptop', precio: 800},
-];
+]
+
+const obtenerNombres = p =>  p.nombre
+const resultado = carrito.map(obtenerNombres)
+console.log(resultado)
+
+const mayor300 = p => p.precio > 300  
+const resultado2 = carrito.filter(mayor300)
+console.log(resultado2)
