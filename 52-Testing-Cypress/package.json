@@ -1,0 +1,14 @@
+{
+  "name": "52-testing-cypress",
+  "version": "1.0.0",
+  "description": "Ejemplo CYPRESS",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Guillermo Franco Borjon",
+  "license": "ISC",
+  "devDependencies": {
+    "cypress": "^13.5.0"
+  }
+}
