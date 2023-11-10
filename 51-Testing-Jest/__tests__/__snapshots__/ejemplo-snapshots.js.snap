@@ -1,0 +1,9 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`test a cliente con snapshots Es memo 1`] = `
+{
+  "balance": 800,
+  "nombre": "Maguito",
+  "tipo": "Premium",
+}
+`;
